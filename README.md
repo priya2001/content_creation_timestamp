@@ -1,6 +1,13 @@
 # Notes App
 
-A modern, responsive notes-taking application built with Next.js, TypeScript, and MongoDB.
+A modern, responsive note-taking application built with Next.js, TypeScript, and MongoDB, designed for effortless note management and a clean, intuitive interface.
+
+## Screensorts
+
+![App Output](image/img1.png)
+![App Output](image/img2.png)
+![App Output](image/img3.png)
+![App Output](image/img4.png)
 
 ## Features
 
@@ -22,16 +29,19 @@ A modern, responsive notes-taking application built with Next.js, TypeScript, an
 ## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone <repository-url>
    ```
 
 2. Navigate to the project directory:
+
    ```bash
    cd notes-app
    ```
 
 3. Install dependencies:
+
    ```bash
    npm install
    ```
@@ -45,6 +55,7 @@ A modern, responsive notes-taking application built with Next.js, TypeScript, an
 ## Running the Application
 
 1. Start the development server:
+
    ```bash
    npm run dev
    ```
