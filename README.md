@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Notes App
 
-## Getting Started
+A modern, responsive notes-taking application built with Next.js, TypeScript, and MongoDB.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Create, Read, Update, Delete (CRUD)**: Full notes management functionality
+- **Responsive Design**: Works on mobile, tablet, and desktop devices
+- **Dark/Light Mode**: Toggle between themes with the theme switcher
+- **Modern UI**: Clean, intuitive interface with card-based layout
+- **Real-time Data**: Notes are saved and updated in real-time
+- **MongoDB Integration**: Secure backend storage for your notes
+
+## Tech Stack
+
+- **Frontend**: Next.js 16.1.1, React 19.2.3
+- **Styling**: Tailwind CSS, Lucide React icons
+- **Database**: MongoDB with Mongoose ODM
+- **TypeScript**: Strongly typed codebase
+- **API Routes**: Next.js App Router API routes
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd notes-app
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Set up environment variables:
+   Create a `.env.local` file in the root directory with your MongoDB connection string:
+   ```
+   MONGODB_URI=your_mongodb_connection_string
+   ```
+
+## Running the Application
+
+1. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+2. Open your browser and visit: [http://localhost:3000](http://localhost:3000)
+
+## Usage
+
+- **Add a Note**: Fill in the title and content fields and click "Add Note"
+- **Edit a Note**: Click the pencil icon on any note card
+- **Delete a Note**: Click the trash icon on any note card
+- **Toggle Theme**: Use the sun/moon icon in the top right corner to switch between light and dark modes
+
+## Project Structure
+
+```
+notes-app/
+├── app/
+│   ├── api/
+│   │   └── notes/
+│   │       ├── [id]/
+│   │       └── route.ts
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   ├── NoteCard.tsx
+│   ├── NoteForm.tsx
+│   ├── NoteList.tsx
+│   └── ThemeToggle.tsx
+├── lib/
+│   └── mongodb.ts
+├── models/
+│   └── Note.ts
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## API Endpoints
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `GET /api/notes` - Get all notes
+- `POST /api/notes` - Create a new note
+- `PUT /api/notes/:id` - Update an existing note
+- `DELETE /api/notes/:id` - Delete a note
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contributing
 
-## Learn More
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License.
