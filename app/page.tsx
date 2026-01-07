@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import NoteList from "@/components/NoteList";
 import NoteForm from "@/components/NoteForm";
+import ThemeToggle from "@/components/ThemeToggle";
 
 type Note = {
   _id: string;
@@ -39,11 +40,14 @@ export default function Home() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Notes App</h1>
+    <div className="max-w-6xl mx-auto p-6 min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Notes App</h1>
+        <ThemeToggle />
+      </div>
 
       {/* FORM */}
-      <div className="mb-10 bg-white p-6 rounded-xl shadow-md">
+      <div className="mb-10 bg-white p-6 rounded-xl shadow-md dark:bg-gray-800 dark:shadow-gray-800/30">
         <NoteForm 
           onSave={handleSave} 
           selectedNote={selectedNote} 
