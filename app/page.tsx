@@ -1,52 +1,62 @@
 "use client";
+
 import { useEffect, useState } from "react";
-import NoteForm from "@/components/NoteForm";
 import NoteList from "@/components/NoteList";
+import NoteForm from "@/components/NoteForm";
+
+type Note = {
+  _id: string;
+  title: string;
+  content: string;
+  createdAt: string;
+};
 
 export default function Home() {
-  const [notes, setNotes] = useState<any[]>([]);
-  const [selectedNote, setSelectedNote] = useState<any | null>(null);
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [selectedNote, setSelectedNote] = useState<Note | null>(null);
 
-  async function fetchNotes() {
+  // 🔹 Fetch notes
+  const fetchNotes = async () => {
     const res = await fetch("/api/notes");
-    setNotes(await res.json());
-  }
-
-  async function deleteNote(id: string) {
-    await fetch(`/api/notes/${id}`, { method: "DELETE" });
-    fetchNotes();
-  }
-
-  function editNote(note: any) {
-    setSelectedNote(note);
-  }
-
-  function clearEdit() {
-    setSelectedNote(null);
-  }
+    const data = await res.json();
+    setNotes(data);
+  };
 
   useEffect(() => {
     fetchNotes();
   }, []);
 
+  // 🔹 Handle save note (create or update)
+  const handleSave = async () => {
+    setSelectedNote(null);
+    fetchNotes();
+  };
+
+  // 🔹 Delete note
+  const deleteNote = async (id: string) => {
+    await fetch(`/api/notes/${id}`, { method: "DELETE" });
+    fetchNotes();
+  };
+
   return (
-    <main className="max-w-xl mx-auto p-4 space-y-6">
-      <h1 className="text-3xl font-bold">Notes App</h1>
+    <div className="max-w-6xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">Notes App</h1>
 
-      <NoteForm
-        onSave={() => {
-          fetchNotes();
-          clearEdit();
-        }}
-        selectedNote={selectedNote}
-        onCancel={clearEdit}
-      />
+      {/* FORM */}
+      <div className="mb-10 bg-white p-6 rounded-xl shadow-md">
+        <NoteForm 
+          onSave={handleSave} 
+          selectedNote={selectedNote} 
+          onCancel={() => setSelectedNote(null)} 
+        />
+      </div>
 
-      <NoteList
-        notes={notes}
-        onDelete={deleteNote}
-        onEdit={editNote}
+      {/* NOTES LIST */}
+      <NoteList 
+        notes={notes} 
+        onDelete={deleteNote} 
+        onEdit={setSelectedNote} 
       />
-    </main>
+    </div>
   );
 }

@@ -7,15 +7,17 @@ type Note = {
   content: string;
 };
 
+interface NoteFormProps {
+  onSave: () => void;
+  selectedNote?: Note | null;
+  onCancel?: () => void;
+}
+
 export default function NoteForm({
   onSave,
   selectedNote,
   onCancel,
-}: {
-  onSave: () => void;
-  selectedNote?: Note | null;
-  onCancel?: () => void;
-}) {
+}: NoteFormProps) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -34,12 +36,14 @@ export default function NoteForm({
       // UPDATE
       await fetch(`/api/notes/${selectedNote._id}`, {
         method: "PUT",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, content }),
       });
     } else {
       // CREATE
       await fetch("/api/notes", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, content }),
       });
     }
@@ -50,25 +54,32 @@ export default function NoteForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-2">
-      <input
-        className="border p-2 w-full"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <input
+          className="border p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+          placeholder="Note Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+      </div>
 
-      <textarea
-        className="border p-2 w-full"
-        placeholder="Content"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        required
-      />
+      <div>
+        <textarea
+          className="border p-3 w-full rounded-lg min-h-[120px] focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+          placeholder="Write your note here..."
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          required
+        />
+      </div>
 
-      <div className="flex gap-2">
-        <button className="bg-black text-white px-4 py-2">
+      <div className="flex gap-3">
+        <button 
+          type="submit"
+          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium"
+        >
           {selectedNote ? "Update Note" : "Add Note"}
         </button>
 
@@ -76,7 +87,7 @@ export default function NoteForm({
           <button
             type="button"
             onClick={onCancel}
-            className="border px-4 py-2"
+            className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 font-medium"
           >
             Cancel
           </button>
