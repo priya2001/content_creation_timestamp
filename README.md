@@ -4,7 +4,7 @@ A modern, responsive note-taking application built with Next.js, TypeScript, and
 
 ## Screensorts
 
-### add Note
+### Add Note
 
 ![App Output](image/img1.png)
 
